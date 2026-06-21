@@ -1,13 +1,18 @@
 using Microsoft.EntityFrameworkCore;
-using MonitorPrecos.API.Data;
+using MonitorPrecos.API.Application.Services;
+using MonitorPrecos.API.Domain.Interfaces;
+using MonitorPrecos.API.Infrastructure.Data;
+using MonitorPrecos.API.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 builder.Services.AddRouting(option => option.LowercaseUrls = true);
-// Configurando o banco de dados SQLite apontando para um arquivo chamado "monitor.db"
+
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite("Data Source=monitor.db"));
+
+builder.Services.AddScoped<IPrecoRepository, PrecoRepository>();
+builder.Services.AddScoped<PrecoService>();
 
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();

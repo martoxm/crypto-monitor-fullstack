@@ -362,3 +362,5 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /MonitorPrecos.API/monitor.db
+/MonitorPrecos.API/monitor.db-shm
+/MonitorPrecos.API/monitor.db-wal

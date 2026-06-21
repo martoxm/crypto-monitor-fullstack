@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MonitorPrecos.API.Models;
+namespace MonitorPrecos.API.Domain.Entities;
 
 public class RegistroPreco
 {

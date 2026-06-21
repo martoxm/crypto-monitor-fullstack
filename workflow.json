@@ -68,11 +68,8 @@
         "method": "POST",
         "url": "https://numeral-robe-unsent.ngrok-free.dev/api/precos",
         "sendBody": true,
-        "bodyParameters": {
-          "parameters": [
-            {}
-          ]
-        },
+        "specifyBody": "json",
+        "jsonBody": "={{ $json }}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -127,7 +124,7 @@
     "binaryMode": "separate",
     "availableInMCP": false
   },
-  "versionId": "833e9056-6aeb-4fb8-8e10-0077e2772996",
+  "versionId": "a29da6e3-ad3d-4580-9ba5-cf404037ab6b",
   "meta": {
     "instanceId": "d3252c5778b261d26beeb3bbe23e37ab6068833a58353254570ee2314c80365f"
   },
