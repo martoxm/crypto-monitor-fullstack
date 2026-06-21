@@ -1,7 +1,7 @@
 // ==========================================
 // CONFIGURAÇÃO DA URL DA API
 // ==========================================
-const API_URL = "https://localhost:7124/api/precos"
+const API_URL = "http://137.131.227.246:5000/api/precos"
 
 // Variável global para guardar a instância do gráfico e evitar duplicações
 let meuGrafico = null
@@ -12,9 +12,15 @@ let meuGrafico = null
 function formatarDataLocal(dataIso) {
   if (!dataIso) return "---"
   try {
-    const data = new Date(dataIso)
+    // Adiciona o "Z" no final para forçar o JavaScript a entender que a data vem em UTC da VM
+    const stringUtc = dataIso.endsWith("Z") ? dataIso : dataIso + "Z"
+    const data = new Date(stringUtc)
+
     if (isNaN(data.getTime())) return dataIso
+
+    // Converte e formata explicitamente para o fuso horário do Brasil
     return data.toLocaleString("pt-BR", {
+      timeZone: "America/Sao_Paulo",
       day: "2-digit",
       month: "2-digit",
       year: "numeric",
@@ -36,10 +42,14 @@ function renderizarGrafico(lista) {
   // Inverte o array para renderizar em ordem cronológica (da esquerda para a direita)
   const dadosInvertidos = [...lista].reverse()
 
-  // Extrai os horários formatados para o eixo X
+  // Extrai os horários formatados para o eixo X corrigindo o fuso horário
   const rotulosHoras = dadosInvertidos.map((item) => {
-    const d = new Date(item.dataRegistro ?? item.DataRegistro)
+    const dataCrua = item.dataRegistro ?? item.DataRegistro
+    const stringUtc = dataCrua.endsWith("Z") ? dataCrua : dataCrua + "Z"
+    const d = new Date(stringUtc)
+
     return d.toLocaleTimeString("pt-BR", {
+      timeZone: "America/Sao_Paulo",
       hour: "2-digit",
       minute: "2-digit",
       second: "2-digit",
@@ -79,8 +89,16 @@ function renderizarGrafico(lista) {
     options: {
       responsive: true,
       maintainAspectRatio: false,
+      layout: {
+        padding: {
+          left: 15,
+          right: 15,
+          top: 15,
+          bottom: 15,
+        },
+      },
       plugins: {
-        legend: { display: false }, // Minimalista sem legenda superior
+        legend: { display: false },
       },
       scales: {
         x: {
@@ -89,6 +107,8 @@ function renderizarGrafico(lista) {
         },
         y: {
           grid: { color: "rgba(255, 255, 255, 0.05)" },
+          // Força o gráfico a criar um espaço em cima e embaixo do preço se ele for estático
+          grace: "5%",
           ticks: {
             color: "#94a3b8",
             callback: function (value) {
