@@ -25,6 +25,7 @@ body {
   align-items: center;
   overflow-x: hidden;
   position: relative;
+  padding: 1rem; /* Garante que o site não cole nas bordas do celular */
 }
 
 /* Elemento decorativo de fundo com movimento continuo */
@@ -46,8 +47,11 @@ body {
 .container {
   width: 100%;
   max-width: 800px;
-  padding: 2rem;
+  padding: 1rem;
   z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centraliza verticalmente se necessário */
 }
 
 header {
@@ -132,6 +136,7 @@ header p {
   font-weight: 700;
   margin-bottom: 0.5rem;
   letter-spacing: -2px;
+  word-wrap: break-word; /* Evita que o preço quebre o layout */
 }
 
 .currency {
@@ -181,30 +186,17 @@ header p {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   border-radius: 16px;
-  overflow: hidden;
+  overflow-x: auto; /* Permite scroll horizontal em telas pequenas */
   backdrop-filter: blur(8px);
-
-  /* Novo: Mantém a tabela com tamanho fixo se necessário e adiciona scroll suave */
   max-height: 450px;
   overflow-y: auto;
-}
-
-/* Customização moderna da barra de rolagem (Scrollbar avançado) */
-.table-container::-webkit-scrollbar {
-  width: 8px;
-}
-.table-container::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.02);
-}
-.table-container::-webkit-scrollbar-thumb {
-  background: var(--primary-color);
-  border-radius: 4px;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
   text-align: left;
+  min-width: 500px; /* Garante que a tabela não esmague os dados no mobile */
 }
 
 th,
@@ -235,7 +227,56 @@ tr:hover td {
   color: var(--primary-color);
 }
 
-/* --- DEFINIÇÕES DE ANIMAÇÃO (CSS AVANÇADO) --- */
+/* Customização da barra de rolagem interna da tabela */
+.table-container::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.table-container::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+}
+.table-container::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 4px;
+}
+
+/* =========================================================
+   📱 REGRAS DE RESPONSIVIDADE (MEDIA QUERIES AVANÇADAS)
+   ========================================================= */
+
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 1.8rem;
+  }
+
+  header h1 span {
+    font-size: 0.8rem;
+    display: inline-block;
+    margin-top: 5px;
+    margin-left: 0;
+  }
+
+  .price-card {
+    padding: 1.5rem;
+    border-radius: 18px;
+  }
+
+  .price-display {
+    font-size: 2.5rem; /* Diminui o preço para caber em telas de celulares menores */
+  }
+
+  .currency {
+    font-size: 1.5rem;
+  }
+
+  th,
+  td {
+    padding: 0.8rem 1rem; /* Compacta o espaçamento interno da tabela no mobile */
+    font-size: 0.85rem;
+  }
+}
+
+/* --- DEFINIÇÕES DE ANIMAÇÃO --- */
 @keyframes pulse {
   0% {
     transform: scale(0.95);
