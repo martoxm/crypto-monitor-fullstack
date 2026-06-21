@@ -6,11 +6,17 @@ using MonitorPrecos.API.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// ---------------------------------------------------------
+// 1. CONFIGURAÇÃO DOS SERVIÇOS (Injeção de Dependência)
+// ---------------------------------------------------------
+
 builder.Services.AddRouting(option => option.LowercaseUrls = true);
 
+// Configuração do Banco de Dados SQLite
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite("Data Source=monitor.db"));
 
+// Correção da Injeção de Dependência (Padrão DDD / SOLID)
 builder.Services.AddScoped<IPrecoRepository, PrecoRepository>();
 builder.Services.AddScoped<PrecoService>();
 
@@ -18,7 +24,20 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.Services.AddSwaggerGen();
 
+// Configuração da política de CORS
+builder.Services.AddCors(options => {
+    options.AddPolicy("AllowAll", policy => {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
+
 var app = builder.Build();
+
+// ---------------------------------------------------------
+// 2. CONFIGURAÇÃO DOS MIDDLEWARES (Ordem de Execução)
+// ---------------------------------------------------------
 
 if (app.Environment.IsDevelopment())
 {
@@ -27,10 +46,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// REGRA DE OURO: O CORS precisa vir antes de QUALQUER redirecionamento ou segurança
+app.UseCors("AllowAll");
+
 app.UseHttpsRedirection();
 app.UseAuthorization();
 
-// IMPORTANTE: Adicione esta linha abaixo para que o .NET saiba como rotear seus Controllers
+// Roteamento dos seus Controllers da API
 app.MapControllers();
 
 app.Run();

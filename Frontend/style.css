@@ -1,0 +1,286 @@
+/* Variáveis de Cores Modernas */
+:root {
+  --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+  --card-bg: rgba(255, 255, 255, 0.06);
+  --card-border: rgba(255, 255, 255, 0.1);
+  --primary-color: #818cf8;
+  --accent-color: #34d399;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  background: var(--bg-gradient);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Elemento decorativo de fundo com movimento continuo */
+.background-decor {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(
+    circle,
+    rgba(129, 140, 248, 0.15) 0%,
+    rgba(0, 0, 0, 0) 70%
+  );
+  top: -10%;
+  right: -10%;
+  z-index: 0;
+  animation: floatBackground 12s infinite ease-in-out;
+}
+
+.container {
+  width: 100%;
+  max-width: 800px;
+  padding: 2rem;
+  z-index: 1;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  animation: fadeInDown 0.8s ease-out;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -1px;
+}
+
+header h1 span {
+  color: var(--accent-color);
+  font-size: 1rem;
+  text-transform: uppercase;
+  border: 1px solid var(--accent-color);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  vertical-align: middle;
+  margin-left: 10px;
+}
+
+header p {
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+}
+
+/* Card Estilo Glassmorphism com Efeito Hover Avançado */
+.price-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 24px;
+  padding: 2.5rem;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  transition:
+    transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    border-color 0.4s;
+  animation: scaleUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.price-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--primary-color);
+}
+
+.card-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 1rem;
+}
+
+.badge {
+  background: rgba(129, 140, 248, 0.2);
+  color: var(--primary-color);
+  padding: 0.4rem 1rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+/* Indicador Pulsante (Efeito de Live) */
+.pulse-indicator {
+  width: 10px;
+  height: 10px;
+  background-color: var(--accent-color);
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7);
+  animation: pulse 1.6s infinite;
+}
+
+.price-display {
+  font-size: 4rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  letter-spacing: -2px;
+}
+
+.currency {
+  color: var(--text-muted);
+  font-size: 2rem;
+  margin-right: 5px;
+}
+
+.update-text {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Botão Moderno com Transição de Gradiente */
+.btn-refresh {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 14px rgba(129, 140, 248, 0.4);
+}
+
+.btn-refresh:hover {
+  background: #6366f1;
+  transform: scale(1.03);
+  box-shadow: 0 6px 20px rgba(129, 140, 248, 0.6);
+}
+
+.btn-refresh:active {
+  transform: scale(0.98);
+}
+
+/* Seção do Histórico / Tabela */
+.history-section h2 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: var(--text-main);
+}
+
+.table-container {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+
+  /* Novo: Mantém a tabela com tamanho fixo se necessário e adiciona scroll suave */
+  max-height: 450px;
+  overflow-y: auto;
+}
+
+/* Customização moderna da barra de rolagem (Scrollbar avançado) */
+.table-container::-webkit-scrollbar {
+  width: 8px;
+}
+.table-container::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+}
+.table-container::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 4px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+th,
+td {
+  padding: 1rem 1.5rem;
+}
+
+th {
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  border-bottom: 1px solid var(--card-border);
+}
+
+td {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  font-size: 0.95rem;
+}
+
+tr {
+  transition: background-color 0.2s;
+}
+
+tr:hover td {
+  background-color: rgba(255, 255, 255, 0.02);
+  color: var(--primary-color);
+}
+
+/* --- DEFINIÇÕES DE ANIMAÇÃO (CSS AVANÇADO) --- */
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(52, 211, 153, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(52, 211, 153, 0);
+  }
+}
+
+@keyframes floatBackground {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-30px, 40px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

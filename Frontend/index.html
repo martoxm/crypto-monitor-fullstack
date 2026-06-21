@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crypto Monitor - Full Stack</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="background-decor"></div>
+
+    <div class="container">
+      <header>
+        <h1>CryptoMonitor <span>Live</span></h1>
+        <p>Integração de dados via n8n e .NET 10</p>
+      </header>
+
+      <div class="price-card">
+        <div class="card-header">
+          <span class="badge">Bitcoin</span>
+          <div class="pulse-indicator"></div>
+        </div>
+        <div class="price-display">
+          <span class="currency">U$</span>
+          <span id="btc-price">---</span>
+        </div>
+        <p class="update-text">
+          Última atualização: <span id="last-update">Nunca</span>
+        </p>
+        <button id="refresh-btn" class="btn-refresh">Atualizar Painel</button>
+      </div>
+
+      <div class="history-section">
+        <h2>Histórico de Capturas</h2>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Moeda</th>
+                <th>Preço (USD)</th>
+                <th>Data/Hora (UTC)</th>
+              </tr>
+            </thead>
+            <tbody id="history-table-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
