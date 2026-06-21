@@ -237,6 +237,58 @@ tr:hover td {
   border-radius: 4px;
 }
 
+/* =========================================================
+   🌐 ESTILIZAÇÃO DO FOOTER (REDES SOCIAIS)
+   ========================================================= */
+footer {
+  text-align: center;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--card-border);
+  width: 100%;
+  max-width: 800px;
+  z-index: 1;
+}
+
+footer p {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+#social-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px; /* Espaçamento entre os ícones */
+}
+
+#social-links a {
+  color: var(--text-muted);
+  font-size: 1.5rem; /* Tamanho dos ícones */
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease;
+  display: inline-block;
+}
+
+/* Efeito Hover Individual - Cada rede acende com sua cor oficial */
+#social-links a:hover {
+  transform: translateY(-3px);
+}
+
+#social-links a[title="GitHub"]:hover {
+  color: #f0f6fc; /* Cor clara do GitHub */
+}
+
+#social-links a[title="LinkedIn"]:hover {
+  color: #0a66c2; /* Azul oficial do LinkedIn */
+}
+
+#social-links a[title="Instagram"]:hover {
+  color: #e1306c; /* Rosa/Vermelho oficial do Instagram */
+}
+
 /* Responsividade Mobile */
 @media (max-width: 600px) {
   header h1 {
