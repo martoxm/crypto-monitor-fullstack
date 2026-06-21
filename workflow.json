@@ -1,0 +1,137 @@
+{
+  "name": "Monitor de Preços Cripto",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        0
+      ],
+      "id": "1c66302b-a274-4dc3-96ed-58b896a5d40d",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "url": "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        208,
+        0
+      ],
+      "id": "9ae513af-1bbf-4520-9c9c-56e4aed04ff7",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "dc47b1eb-6694-4f47-91dc-9f0dc13322fa",
+              "name": "=preco",
+              "value": "={{ $json.bitcoin }}",
+              "type": "object"
+            },
+            {
+              "id": "115caa49-5f2d-4674-85cc-eedb334a48a8",
+              "name": "moeda",
+              "value": "BTC",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        416,
+        0
+      ],
+      "id": "48b16afe-069d-4c21-bd01-d752627e4a4b",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://numeral-robe-unsent.ngrok-free.dev/api/precos",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        624,
+        0
+      ],
+      "id": "e0a4b9f8-fdaf-4da5-9e70-7dd9b1c98d53",
+      "name": "HTTP Request1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "833e9056-6aeb-4fb8-8e10-0077e2772996",
+  "meta": {
+    "instanceId": "d3252c5778b261d26beeb3bbe23e37ab6068833a58353254570ee2314c80365f"
+  },
+  "nodeGroups": [],
+  "id": "7Nu62Rao3T2Ujqym",
+  "tags": []
+}
