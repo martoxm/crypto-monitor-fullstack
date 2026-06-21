@@ -33,11 +33,10 @@ function formatarDataLocal(dataIso) {
 function renderizarGrafico(lista) {
   const ctx = document.getElementById("price-chart").getContext("2d")
 
-  // Como a lista vem ordenada do mais novo para o mais antigo,
-  // nós invertemos (.reverse()) para o gráfico desenhar da esquerda para a direita (cronológico)
+  // Inverte o array para renderizar em ordem cronológica (da esquerda para a direita)
   const dadosInvertidos = [...lista].reverse()
 
-  // Extrai os preços e os horários formatados para os eixos X e Y
+  // Extrai os horários formatados para o eixo X
   const rotulosHoras = dadosInvertidos.map((item) => {
     const d = new Date(item.dataRegistro ?? item.DataRegistro)
     return d.toLocaleTimeString("pt-BR", {
@@ -47,11 +46,12 @@ function renderizarGrafico(lista) {
     })
   })
 
+  // Extrai os preços para o eixo Y
   const valoresPrecos = dadosInvertidos.map(
     (item) => item.valorUsd ?? item.valorUSD ?? item.Usd ?? item.ValorUsd ?? 0,
   )
 
-  // Se o gráfico já existir, destrói a versão antiga para renderizar os dados novos sem sobreposição
+  // Se o gráfico já existir, destrói a versão antiga antes de criar a nova
   if (meuGrafico) {
     meuGrafico.destroy()
   }
@@ -68,7 +68,7 @@ function renderizarGrafico(lista) {
           borderColor: "#818cf8", // Cor primária (indigo)
           backgroundColor: "rgba(129, 140, 248, 0.1)",
           borderWidth: 3,
-          tension: 0.3, // Deixa a linha suavemente curvada
+          tension: 0.3, // Linha suavemente curvada
           pointBackgroundColor: "#34d399", // Pontos em verde neon (accent)
           pointBorderColor: "#fff",
           pointRadius: 4,
@@ -80,7 +80,7 @@ function renderizarGrafico(lista) {
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: false }, // Oculta a legenda superior para ficar minimalista
+        legend: { display: false }, // Minimalista sem legenda superior
       },
       scales: {
         x: {
@@ -106,14 +106,17 @@ function renderizarGrafico(lista) {
 // ==========================================
 async function buscarDados() {
   try {
-    console.log("Iniciando requisição para:", API_URL)
+    console.log(
+      "Buscando dados atualizados da API em:",
+      new Date().toLocaleTimeString("pt-BR"),
+    )
     const response = await fetch(API_URL)
 
     if (!response.ok)
       throw new Error(`Erro de rede: Código status ${response.status}`)
 
     const dados = await response.json()
-    console.log("Dados recebidos da API:", dados)
+    console.log("Dados recebidos com sucesso:", dados)
 
     if (dados && dados.length > 0) {
       const maisRecente = dados[0]
@@ -125,7 +128,7 @@ async function buscarDados() {
         maisRecente.ValorUsd
       const dataFinal = maisRecente.dataRegistro ?? maisRecente.DataRegistro
 
-      // 1. Preço principal
+      // 1. Atualiza o preço grande do card
       if (precoFinal !== undefined && precoFinal !== null) {
         document.getElementById("btc-price").innerText =
           precoFinal.toLocaleString("en-US", {
@@ -134,23 +137,23 @@ async function buscarDados() {
           })
       }
 
-      // 2. Data de atualização
+      // 2. Atualiza a label de última atualização
       if (dataFinal) {
         document.getElementById("last-update").innerText =
           formatarDataLocal(dataFinal)
       }
 
-      // 3. Tabela
+      // 3. Atualiza as linhas da tabela de histórico
       atualizarTabela(dados)
 
-      // 4. NOVO: Renderizar o Gráfico de Linha
+      // 4. Atualiza as linhas do Gráfico
       renderizarGrafico(dados)
     } else {
       document.getElementById("btc-price").innerText = "Sem dados"
       document.getElementById("last-update").innerText = "Banco vazio."
     }
   } catch (error) {
-    console.error("Erro no fluxo:", error)
+    console.error("Erro no fluxo de atualização:", error)
     document.getElementById("btc-price").innerText = "Erro"
   }
 }
@@ -180,5 +183,18 @@ function atualizarTabela(lista) {
   })
 }
 
+// ==========================================
+// EVENTOS DE DISPARO DA PÁGINA
+// ==========================================
+
+// Clique manual do botão "Atualizar Painel"
 document.getElementById("refresh-btn").addEventListener("click", buscarDados)
+
+// Execução automática assim que a página é aberta pela primeira vez
 window.addEventListener("DOMContentLoaded", buscarDados)
+
+// ==========================================================
+// 🕒 POLLING AUTOMÁTICO (ATUALIZAÇÃO DE 5 EM 5 MINUTOS)
+// ==========================================================
+// 300000 milissegundos = Exatamente 5 minutos
+setInterval(buscarDados, 300000)
