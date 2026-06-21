@@ -28,7 +28,7 @@ body {
   padding: 1rem; /* Garante que o site não cole nas bordas do celular */
 }
 
-/* Elemento decorativo de fundo com movimento continuo */
+/* Elemento decorativo de fundo totalmente estático */
 .background-decor {
   position: absolute;
   width: 500px;
@@ -41,7 +41,6 @@ body {
   top: -10%;
   right: -10%;
   z-index: 0;
-  animation: floatBackground 12s infinite ease-in-out;
 }
 
 .container {
@@ -51,13 +50,12 @@ body {
   z-index: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Centraliza verticalmente se necessário */
+  justify-content: center;
 }
 
 header {
   text-align: center;
   margin-bottom: 2.5rem;
-  animation: fadeInDown 0.8s ease-out;
 }
 
 header h1 {
@@ -82,7 +80,7 @@ header p {
   margin-top: 0.5rem;
 }
 
-/* Card Estilo Glassmorphism com Efeito Hover Avançado */
+/* Card Estilo Glassmorphism - Removido animação de entrada de escala */
 .price-card {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
@@ -96,7 +94,6 @@ header p {
   transition:
     transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
     border-color 0.4s;
-  animation: scaleUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .price-card:hover {
@@ -121,7 +118,7 @@ header p {
   font-size: 0.85rem;
 }
 
-/* Indicador Pulsante (Efeito de Live) */
+/* Indicador Pulsante (Mantido apenas este efeito sutil de Live) */
 .pulse-indicator {
   width: 10px;
   height: 10px;
@@ -136,7 +133,7 @@ header p {
   font-weight: 700;
   margin-bottom: 0.5rem;
   letter-spacing: -2px;
-  word-wrap: break-word; /* Evita que o preço quebre o layout */
+  word-wrap: break-word;
 }
 
 .currency {
@@ -151,7 +148,7 @@ header p {
   margin-bottom: 1.5rem;
 }
 
-/* Botão Moderno com Transição de Gradiente */
+/* Botão Moderno */
 .btn-refresh {
   background: var(--primary-color);
   color: white;
@@ -186,7 +183,7 @@ header p {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   border-radius: 16px;
-  overflow-x: auto; /* Permite scroll horizontal em telas pequenas */
+  overflow-x: auto;
   backdrop-filter: blur(8px);
   max-height: 450px;
   overflow-y: auto;
@@ -196,7 +193,7 @@ table {
   width: 100%;
   border-collapse: collapse;
   text-align: left;
-  min-width: 500px; /* Garante que a tabela não esmague os dados no mobile */
+  min-width: 500px;
 }
 
 th,
@@ -227,7 +224,7 @@ tr:hover td {
   color: var(--primary-color);
 }
 
-/* Customização da barra de rolagem interna da tabela */
+/* Barra de rolagem interna */
 .table-container::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -240,10 +237,7 @@ tr:hover td {
   border-radius: 4px;
 }
 
-/* =========================================================
-   📱 REGRAS DE RESPONSIVIDADE (MEDIA QUERIES AVANÇADAS)
-   ========================================================= */
-
+/* Responsividade Mobile */
 @media (max-width: 600px) {
   header h1 {
     font-size: 1.8rem;
@@ -262,7 +256,7 @@ tr:hover td {
   }
 
   .price-display {
-    font-size: 2.5rem; /* Diminui o preço para caber em telas de celulares menores */
+    font-size: 2.5rem;
   }
 
   .currency {
@@ -271,12 +265,12 @@ tr:hover td {
 
   th,
   td {
-    padding: 0.8rem 1rem; /* Compacta o espaçamento interno da tabela no mobile */
+    padding: 0.8rem 1rem;
     font-size: 0.85rem;
   }
 }
 
-/* --- DEFINIÇÕES DE ANIMAÇÃO --- */
+/* Animacao do Ponto Pulsante */
 @keyframes pulse {
   0% {
     transform: scale(0.95);
@@ -289,39 +283,5 @@ tr:hover td {
   100% {
     transform: scale(0.95);
     box-shadow: 0 0 0 0 rgba(52, 211, 153, 0);
-  }
-}
-
-@keyframes floatBackground {
-  0% {
-    transform: translate(0, 0);
-  }
-  50% {
-    transform: translate(-30px, 40px);
-  }
-  100% {
-    transform: translate(0, 0);
-  }
-}
-
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes scaleUp {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
   }
 }
