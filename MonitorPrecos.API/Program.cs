@@ -55,4 +55,11 @@ app.UseAuthorization();
 // Roteamento dos seus Controllers da API
 app.MapControllers();
 
+// Executa o escopo de inicialização para garantir que o banco e as tabelas existam na VM
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<MonitorPrecos.API.Infrastructure.Data.AppDbContext>();
+    // Esta linha cria o arquivo .db e todas as tabelas automaticamente se elas não existirem
+    context.Database.EnsureCreated();
+}
 app.Run();
