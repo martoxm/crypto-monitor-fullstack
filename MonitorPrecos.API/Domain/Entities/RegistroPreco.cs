@@ -13,5 +13,5 @@ public class RegistroPreco
     public decimal ValorUsd { get; set; }
 
     // Registra o momento exato em que o dado entrou no nosso banco
-    public DateTime DataRegistro { get; set; } = DateTime.UtcNow;
+    public DateTime DataRegistro { get; set; } = DateTime.Now;
 }

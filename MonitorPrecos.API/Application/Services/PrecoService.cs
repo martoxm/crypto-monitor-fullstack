@@ -15,7 +15,7 @@ public class PrecoService(IPrecoRepository repository)
         {
             Moeda = dto.Moeda,
             ValorUsd = dto.Preco.Usd,
-            DataRegistro = DateTime.UtcNow
+            DataRegistro = DateTime.Now // 
         };
 
         await _repository.AdicionarAsync(novoRegistro);
