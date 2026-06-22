@@ -1,6 +1,6 @@
-﻿using MonitorPrecos.API.Domain.Entities;
+﻿using MonitorPrecos.Domain.Entities;
 
-namespace MonitorPrecos.API.Domain.Interfaces;
+namespace MonitorPrecos.Domain.Interfaces;
 
 public interface IPrecoRepository
 {

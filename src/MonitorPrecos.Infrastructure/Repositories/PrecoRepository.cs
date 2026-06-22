@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MonitorPrecos.API.Domain.Entities;
-using MonitorPrecos.API.Domain.Interfaces;
-using MonitorPrecos.API.Infrastructure.Data;
+using MonitorPrecos.Domain.Entities;
+using MonitorPrecos.Domain.Interfaces;
+using MonitorPrecos.Infrastructure.Data;
 
-namespace MonitorPrecos.API.Infrastructure.Repositories;
+namespace MonitorPrecos.Infrastructure.Repositories;
 
 public class PrecoRepository(AppDbContext context) : IPrecoRepository
 {
@@ -17,7 +17,6 @@ public class PrecoRepository(AppDbContext context) : IPrecoRepository
 
     public async Task<IEnumerable<RegistroPreco>> ObterTodosAsync()
     {
-        // O comando Take(10) garante que o banco de dados só trará as 10 últimas capturas
         return await _context.RegistrosPrecos
             .OrderByDescending(p => p.DataRegistro)
             .Take(10)

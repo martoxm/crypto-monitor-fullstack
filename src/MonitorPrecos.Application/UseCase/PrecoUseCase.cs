@@ -1,22 +1,20 @@
-﻿using MonitorPrecos.API.Domain.Entities;
-using MonitorPrecos.API.Domain.Interfaces;
-using MonitorPrecos.Application.DTOs;
-
+﻿using MonitorPrecos.Application.DTOs;
+using MonitorPrecos.Domain.Entities;
+using MonitorPrecos.Domain.Interfaces;
 
 namespace MonitorPrecos.Application.UseCase;
 
-public class PrecoServiceUseCase(IPrecoRepository repository)
+public class PrecoUseCase(IPrecoRepository repository)
 {
     private readonly IPrecoRepository _repository = repository;
 
     public async Task<RegistroPreco> ProcessarESalvarPrecoAsync(PrecoCryptoDto dto)
     {
-        // Aqui aplicaríamos regras de negócio se necessário (SOLID - Responsabilidade Única)
         var novoRegistro = new RegistroPreco
         {
             Moeda = dto.Moeda,
             ValorUsd = dto.Preco.Usd,
-            DataRegistro = DateTime.Now // 
+            DataRegistro = DateTime.Now //
         };
 
         await _repository.AdicionarAsync(novoRegistro);

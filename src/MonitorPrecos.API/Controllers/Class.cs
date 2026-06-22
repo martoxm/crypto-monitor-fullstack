@@ -6,9 +6,9 @@ namespace MonitorPrecos.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class PrecosController(PrecoServiceUseCase precoService) : ControllerBase
+public class PrecosController(PrecoUseCase precoService) : ControllerBase
 {
-    private readonly PrecoServiceUseCase _precoService = precoService;
+    private readonly PrecoUseCase _precoService = precoService;
 
     [HttpPost]
     public async Task<IActionResult> ReceberPreco([FromBody] PrecoCryptoDto dadosDoN8n)
