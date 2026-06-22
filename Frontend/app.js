@@ -1,7 +1,7 @@
 // ==========================================
 // CONFIGURAÇÃO DA URL DA API
 // ==========================================
-const API_URL = "https://137.131.227.246/api/precos"
+const API_URL = "https://api.martodev.online/api/precos"
 
 // Variável global para guardar a instância do gráfico e evitar duplicações
 let meuGrafico = null
