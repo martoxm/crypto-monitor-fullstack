@@ -364,3 +364,9 @@ FodyWeavers.xsd
 /MonitorPrecos.API/monitor.db
 /MonitorPrecos.API/monitor.db-shm
 /MonitorPrecos.API/monitor.db-wal
+/src/MonitorPrecos.API/appsettings.Development.json
+/src/MonitorPrecos.API/appsettings.json
+/src/MonitorPrecos.API/monitor.db
+/src/MonitorPrecos.API/monitor.db-shm
+/src/MonitorPrecos.API/appsettings.Development.json
+/src/MonitorPrecos.API/appsettings.json
