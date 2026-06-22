@@ -32,5 +32,6 @@
     }
   },
   "terminal.integrated.defaultProfile.windows": "Git Bash",
-  "vscode-edge-devtools.headless": true
+  "vscode-edge-devtools.headless": true,
+  "liveServer.settings.port": 5501
 }

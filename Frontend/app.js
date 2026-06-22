@@ -1,24 +1,15 @@
-// ==========================================
-// CONFIGURAÇÃO DA URL DA API
-// ==========================================
 const API_URL = "https://api.martodev.online/api/precos"
 
-// Variável global para guardar a instância do gráfico e evitar duplicações
 let meuGrafico = null
 
-// ==========================================
-// FUNÇÃO AUXILIAR: EXIBIÇÃO DE DATA FORMATADA
-// ==========================================
 function formatarDataLocal(dataIso) {
   if (!dataIso) return "---"
   try {
-    // Adiciona o "Z" no final para forçar o JavaScript a entender que a data vem em UTC da VM
     const stringUtc = dataIso.endsWith("Z") ? dataIso : dataIso + "Z"
     const data = new Date(stringUtc)
 
     if (isNaN(data.getTime())) return dataIso
 
-    // Converte e formata explicitamente para o fuso horário do Brasil
     return data.toLocaleString("pt-BR", {
       timeZone: "America/Sao_Paulo",
       day: "2-digit",
@@ -33,16 +24,11 @@ function formatarDataLocal(dataIso) {
   }
 }
 
-// ==========================================
-// FUNÇÃO AUXILIAR: CONFIGURAR / ATUALIZAR O GRÁFICO
-// ==========================================
 function renderizarGrafico(lista) {
   const ctx = document.getElementById("price-chart").getContext("2d")
 
-  // Inverte o array para renderizar em ordem cronológica (da esquerda para a direita)
   const dadosInvertidos = [...lista].reverse()
 
-  // Extrai os horários formatados para o eixo X corrigindo o fuso horário
   const rotulosHoras = dadosInvertidos.map((item) => {
     const dataCrua = item.dataRegistro ?? item.DataRegistro
     const stringUtc = dataCrua.endsWith("Z") ? dataCrua : dataCrua + "Z"
@@ -56,17 +42,14 @@ function renderizarGrafico(lista) {
     })
   })
 
-  // Extrai os preços para o eixo Y
   const valoresPrecos = dadosInvertidos.map(
     (item) => item.valorUsd ?? item.valorUSD ?? item.Usd ?? item.ValorUsd ?? 0,
   )
 
-  // Se o gráfico já existir, destrói a versão antiga antes de criar a nova
   if (meuGrafico) {
     meuGrafico.destroy()
   }
 
-  // Cria a instância moderna do gráfico de linha do Chart.js
   meuGrafico = new Chart(ctx, {
     type: "line",
     data: {
@@ -75,11 +58,11 @@ function renderizarGrafico(lista) {
         {
           label: "Preço do BTC (USD)",
           data: valoresPrecos,
-          borderColor: "#818cf8", // Cor primária (indigo)
+          borderColor: "#818cf8",
           backgroundColor: "rgba(129, 140, 248, 0.1)",
           borderWidth: 3,
-          tension: 0.3, // Linha suavemente curvada
-          pointBackgroundColor: "#34d399", // Pontos em verde neon (accent)
+          tension: 0.3,
+          pointBackgroundColor: "#34d399",
           pointBorderColor: "#fff",
           pointRadius: 4,
           fill: true,
@@ -107,7 +90,7 @@ function renderizarGrafico(lista) {
         },
         y: {
           grid: { color: "rgba(255, 255, 255, 0.05)" },
-          // Força o gráfico a criar um espaço em cima e embaixo do preço se ele for estático
+
           grace: "5%",
           ticks: {
             color: "#94a3b8",
@@ -121,9 +104,6 @@ function renderizarGrafico(lista) {
   })
 }
 
-// ==========================================
-// FUNÇÃO PRINCIPAL: BUSCAR DADOS DO BACKEND
-// ==========================================
 async function buscarDados() {
   try {
     console.log(
@@ -148,7 +128,6 @@ async function buscarDados() {
         maisRecente.ValorUsd
       const dataFinal = maisRecente.dataRegistro ?? maisRecente.DataRegistro
 
-      // 1. Atualiza o preço grande do card
       if (precoFinal !== undefined && precoFinal !== null) {
         document.getElementById("btc-price").innerText =
           precoFinal.toLocaleString("en-US", {
@@ -157,16 +136,13 @@ async function buscarDados() {
           })
       }
 
-      // 2. Atualiza a label de última atualização
       if (dataFinal) {
         document.getElementById("last-update").innerText =
           formatarDataLocal(dataFinal)
       }
 
-      // 3. Atualiza as linhas da tabela de histórico
       atualizarTabela(dados)
 
-      // 4. Atualiza as linhas do Gráfico
       renderizarGrafico(dados)
     } else {
       document.getElementById("btc-price").innerText = "Sem dados"
@@ -178,9 +154,6 @@ async function buscarDados() {
   }
 }
 
-// ==========================================
-// FUNÇÃO AUXILIAR: POPULAR A TABELA HTML
-// ==========================================
 function atualizarTabela(lista) {
   const tbody = document.getElementById("history-table-body")
   tbody.innerHTML = ""
@@ -203,18 +176,8 @@ function atualizarTabela(lista) {
   })
 }
 
-// ==========================================
-// EVENTOS DE DISPARO DA PÁGINA
-// ==========================================
-
-// Clique manual do botão "Atualizar Painel"
 document.getElementById("refresh-btn").addEventListener("click", buscarDados)
 
-// Execução automática assim que a página é aberta pela primeira vez
 window.addEventListener("DOMContentLoaded", buscarDados)
 
-// ==========================================================
-// 🕒 POLLING AUTOMÁTICO (ATUALIZAÇÃO DE 5 EM 5 MINUTOS)
-// ==========================================================
-// 300000 milissegundos = Exatamente 5 minutos
 setInterval(buscarDados, 300000)

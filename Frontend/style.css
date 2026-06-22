@@ -1,4 +1,3 @@
-/* Variáveis de Cores Modernas */
 :root {
   --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
   --card-bg: rgba(255, 255, 255, 0.06);
@@ -25,10 +24,9 @@ body {
   align-items: center;
   overflow-x: hidden;
   position: relative;
-  padding: 1rem; /* Garante que o site não cole nas bordas do celular */
+  padding: 1rem;
 }
 
-/* Elemento decorativo de fundo totalmente estático */
 .background-decor {
   position: absolute;
   width: 500px;
@@ -80,7 +78,6 @@ header p {
   margin-top: 0.5rem;
 }
 
-/* Card Estilo Glassmorphism - Removido animação de entrada de escala */
 .price-card {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
@@ -118,7 +115,6 @@ header p {
   font-size: 0.85rem;
 }
 
-/* Indicador Pulsante (Mantido apenas este efeito sutil de Live) */
 .pulse-indicator {
   width: 10px;
   height: 10px;
@@ -148,7 +144,6 @@ header p {
   margin-bottom: 1.5rem;
 }
 
-/* Botão Moderno */
 .btn-refresh {
   background: var(--primary-color);
   color: white;
@@ -172,9 +167,6 @@ header p {
   transform: scale(0.98);
 }
 
-/* =========================================================
-   📊 ESTILIZAÇÃO DO GRÁFICO
-   ========================================================= */
 .chart-section {
   margin-bottom: 2.5rem;
 }
@@ -195,10 +187,9 @@ header p {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
   position: relative;
   width: 100%;
-  height: 300px; /* Altura controlada para não quebrar no mobile */
+  height: 300px;
 }
 
-/* Seção do Histórico / Tabela */
 .history-section h2 {
   font-size: 1.3rem;
   margin-bottom: 1rem;
@@ -250,7 +241,6 @@ tr:hover td {
   color: var(--primary-color);
 }
 
-/* Barra de rolagem interna */
 .table-container::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -263,9 +253,6 @@ tr:hover td {
   border-radius: 4px;
 }
 
-/* =========================================================
-   🌐 ESTILIZAÇÃO DO FOOTER (REDES SOCIAIS)
-   ========================================================= */
 footer {
   text-align: center;
   margin-top: 3rem;
@@ -286,36 +273,34 @@ footer p {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px; /* Espaçamento entre os ícones */
+  gap: 20px;
 }
 
 #social-links a {
   color: var(--text-muted);
-  font-size: 1.5rem; /* Tamanho dos ícones */
+  font-size: 1.5rem;
   transition:
     color 0.3s ease,
     transform 0.3s ease;
   display: inline-block;
 }
 
-/* Efeito Hover Individual - Cada rede acende com sua cor oficial */
 #social-links a:hover {
   transform: translateY(-3px);
 }
 
 #social-links a[title="GitHub"]:hover {
-  color: #f0f6fc; /* Cor clara do GitHub */
+  color: #f0f6fc;
 }
 
 #social-links a[title="LinkedIn"]:hover {
-  color: #0a66c2; /* Azul oficial do LinkedIn */
+  color: #0a66c2;
 }
 
 #social-links a[title="Instagram"]:hover {
-  color: #e1306c; /* Rosa/Vermelho oficial do Instagram */
+  color: #e1306c;
 }
 
-/* Responsividade Mobile */
 @media (max-width: 600px) {
   header h1 {
     font-size: 1.8rem;
@@ -348,7 +333,6 @@ footer p {
   }
 }
 
-/* Animacao do Ponto Pulsante */
 @keyframes pulse {
   0% {
     transform: scale(0.95);
