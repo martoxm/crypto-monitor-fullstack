@@ -1,10 +1,11 @@
 ﻿using MonitorPrecos.API.Domain.Entities;
 using MonitorPrecos.API.Domain.Interfaces;
-using MonitorPrecos.API.Models;
+using MonitorPrecos.Application.DTOs;
 
-namespace MonitorPrecos.API.Application.Services;
 
-public class PrecoService(IPrecoRepository repository)
+namespace MonitorPrecos.Application.UseCase;
+
+public class PrecoServiceUseCase(IPrecoRepository repository)
 {
     private readonly IPrecoRepository _repository = repository;
 

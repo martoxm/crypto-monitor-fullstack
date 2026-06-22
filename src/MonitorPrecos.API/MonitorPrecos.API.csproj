@@ -20,4 +20,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="10.2.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MonitorPrecos.Application\MonitorPrecos.Application.csproj" />
+    <ProjectReference Include="..\MonitorPrecos.Infrastructure\MonitorPrecos.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

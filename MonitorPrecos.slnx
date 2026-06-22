@@ -1,3 +1,8 @@
 <Solution>
-  <Project Path="MonitorPrecos.API/MonitorPrecos.API.csproj" />
+  <Folder Name="/src/">
+    <Project Path="src/MonitorPrecos.API/MonitorPrecos.API.csproj" />
+    <Project Path="src/MonitorPrecos.Application/MonitorPrecos.Application.csproj" Id="e93ae46d-6602-4352-9963-5bd9487ccd3f" />
+    <Project Path="src/MonitorPrecos.Domain/MonitorPrecos.Domain.csproj" Id="0dfa8c0a-c1c2-4e48-8044-f097404afc38" />
+    <Project Path="src/MonitorPrecos.Infrastructure/MonitorPrecos.Infrastructure.csproj" Id="e540a50a-e48a-4ab7-88d7-5108c159722b" />
+  </Folder>
 </Solution>

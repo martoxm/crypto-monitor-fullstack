@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MonitorPrecos.API.Application.Services;
-using MonitorPrecos.API.Models;
+using MonitorPrecos.Application.DTOs;
+using MonitorPrecos.Application.UseCase;
 
 namespace MonitorPrecos.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class PrecosController(PrecoService precoService) : ControllerBase
+public class PrecosController(PrecoServiceUseCase precoService) : ControllerBase
 {
-    private readonly PrecoService _precoService = precoService;
+    private readonly PrecoServiceUseCase _precoService = precoService;
 
     [HttpPost]
     public async Task<IActionResult> ReceberPreco([FromBody] PrecoCryptoDto dadosDoN8n)

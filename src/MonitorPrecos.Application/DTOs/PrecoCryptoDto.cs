@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace MonitorPrecos.API.Models;
+namespace MonitorPrecos.Application.DTOs;
 
 // Esta é a classe principal que o n8n vai enviar
 public class PrecoCryptoDto

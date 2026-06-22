@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using MonitorPrecos.API.Application.Services;
 using MonitorPrecos.API.Domain.Interfaces;
 using MonitorPrecos.API.Infrastructure.Data;
 using MonitorPrecos.API.Infrastructure.Repositories;
+using MonitorPrecos.Application.UseCase;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,7 +18,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 // Correção da Injeção de Dependência (Padrão DDD / SOLID)
 builder.Services.AddScoped<IPrecoRepository, PrecoRepository>();
-builder.Services.AddScoped<PrecoService>();
+builder.Services.AddScoped<PrecoServiceUseCase>();
 
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
