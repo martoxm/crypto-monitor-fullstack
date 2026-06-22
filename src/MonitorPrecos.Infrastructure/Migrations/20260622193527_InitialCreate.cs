@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace MonitorPrecos.API.Migrations
+namespace MonitorPrecos.Infrastructure.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration

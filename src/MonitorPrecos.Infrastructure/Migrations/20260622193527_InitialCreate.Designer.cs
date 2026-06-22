@@ -8,10 +8,10 @@ using MonitorPrecos.API.Infrastructure.Data;
 
 #nullable disable
 
-namespace MonitorPrecos.API.Migrations
+namespace MonitorPrecos.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260620235832_InitialCreate")]
+    [Migration("20260622193527_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -20,7 +20,7 @@ namespace MonitorPrecos.API.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.9");
 
-            modelBuilder.Entity("MonitorPrecos.API.Models.RegistroPreco", b =>
+            modelBuilder.Entity("MonitorPrecos.API.Domain.Entities.RegistroPreco", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
