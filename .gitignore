@@ -370,3 +370,15 @@ FodyWeavers.xsd
 /src/MonitorPrecos.API/monitor.db-shm
 /src/MonitorPrecos.API/appsettings.Development.json
 /src/MonitorPrecos.API/appsettings.json
+
+# Ignorar arquivos de compilação
+[Bb]in/
+[Oo]bj/
+.vs/
+.vscode/
+
+# Ignorar os arquivos de cache e do banco SQLite local
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
